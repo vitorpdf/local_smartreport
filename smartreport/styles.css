@@ -1,0 +1,46 @@
+.smartreport { --sr-blue: #0d6efd; --sr-ink: #22272b; --sr-muted: #6c7580; max-width: 1050px; margin: 40px auto; color: var(--sr-ink); }
+.smartreport-home { padding: 56px 0 72px; }
+.smartreport h2 { font-size: 30px; font-weight: 700; margin: 0 0 9px; }
+.smartreport-muted { color: var(--sr-muted); font-size: 15px; }
+.smartreport-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin-top: 44px; }
+.smartreport-card { position: relative; display: block; min-height: 190px; box-sizing: border-box; padding: 24px; border: 1px solid #d5deea; border-radius: 12px; background: #fff; color: var(--sr-ink); text-decoration: none; }
+.smartreport-card:hover { border-color: var(--sr-blue); text-decoration: none; color: var(--sr-ink); }
+.smartreport a:focus-visible { outline: 3px solid var(--sr-blue); outline-offset: 4px; }
+.smartreport-icon { position: relative; display: block; width: 48px; height: 48px; margin-bottom: 18px; color: var(--sr-blue); }
+.smartreport-icon > img { position: absolute; inset: 0; }
+.smartreport-plus { position: absolute; inset: 0; display: grid; place-items: center; }
+.smartreport-plus img { grid-area: 1 / 1; }
+.smartreport-list,.smartreport-question { position: absolute; inset: 0; text-align: center; line-height: 48px; font-size: 22px; font-weight: 700; }
+.smartreport-list img { position: absolute; }
+.smartreport-list .sr-dot { left: 9.5px; }
+.smartreport-list .sr-line { left: 16px; }
+.smartreport-list .sr-row1 { top: 14px; }
+.smartreport-list .sr-row2 { top: 23px; }
+.smartreport-list .sr-row3 { top: 32px; }
+.smartreport-card h3 { font-size: 20px; font-weight: 700; margin: 0 0 12px; }
+.smartreport-card p { font-size: 13px; color: var(--sr-muted); margin: 0; }
+.smartreport-arrow { position: absolute; bottom: 20px; right: 24px; color: var(--sr-blue); font-size: 20px; font-weight: 700; }
+.smartreport-settings { margin-top: 24px; text-align: right; font-size: 13px; }
+.smartreport-body { white-space: pre-wrap; overflow-wrap: anywhere; padding: 28px; background: #fff; border: 1px solid #d5deea; border-radius: 8px; margin-top: 30px; }
+.smartreport-config { background: #fff; border: 1px solid #d5deea; border-radius: 8px; padding: 28px; max-width: 1100px; }
+.smartreport-config h3 { font-size: 18px; font-weight: 700; }
+.smartreport-config input[type=text],.smartreport-config select,.smartreport-config input[type=password],.smartreport-config textarea { max-width: 100%; }
+@media (max-width: 850px) { .smartreport { margin: 24px 12px; } .smartreport-home { padding: 40px 0; } .smartreport-cards { grid-template-columns: 1fr; gap: 16px; } }
+
+/* Scope layout against theme rules for links, spans and images. */
+.smartreport.smartreport-home { width: 100%; box-sizing: border-box; }
+.smartreport .smartreport-cards { width: 100%; align-items: stretch; }
+.smartreport .smartreport-card { float: none; width: auto; min-width: 0; height: auto; line-height: 1.4; text-align: left; }
+.smartreport .smartreport-icon { flex: 0 0 48px; padding: 0; border: 0; }
+.smartreport .smartreport-icon img { margin: 0; padding: 0; border: 0; max-width: none; vertical-align: baseline; }
+.smartreport .smartreport-icon > img { width: 48px; height: 48px; }
+.smartreport .smartreport-card h3 { line-height: 1.2; padding: 0; }
+.smartreport .smartreport-card p { line-height: 1.4; padding: 0 0 20px; }
+@media (max-width: 850px) { .smartreport.smartreport-home { width: auto; } }
+.smartreport-back {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #0d6efd;
+    font-weight: 600;
+    text-decoration: none;
+}
