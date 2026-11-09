@@ -1,132 +1,86 @@
 # SmartReport
 
-Plugin local do Moodle para apresentar uma interface inicial de consultas e
-relatórios sobre indicadores da plataforma.
+**Relatórios pedagógicos e administrativos no Moodle por meio de linguagem natural.**
 
-> **Status:** versão `0.1.1`. Esta versão entrega a
-> estrutura inicial da interface e da configuração; a execução de novas
-> consultas e o catálogo de relatórios populares ainda estão planejados para
-> sprints futuras.
+O **SmartReport** é um plugin em desenvolvimento que utiliza Inteligência Artificial Generativa (IAGen) para facilitar a consulta de dados e a geração de relatórios no Moodle. Sua proposta é permitir que informações do ambiente virtual de aprendizagem sejam obtidas por meio de perguntas, apoiando o acompanhamento dos cursos e a tomada de decisões na gestão educacional.
 
-## Requisitos
+O projeto integra a proposta da **Plataforma SmartEdu**, apresentada no contexto do INOV@ÇÃO UFLA, da Universidade Federal de Lavras. Este repositório concentra o desenvolvimento do **SmartReport**, componente dedicado aos relatórios pedagógicos e administrativos.
 
-- Moodle 4.4 ou posterior.
-- Permissão de administrador do site para acessar o SmartReport e suas
-  configurações.
-- PHP e banco de dados compatíveis com a versão do Moodle instalada.
+## Por que desenvolver o SmartReport?
 
-## Instalação
+Os dados registrados em um ambiente virtual de aprendizagem podem apoiar o acompanhamento das turmas, a identificação de participantes sem acesso e o planejamento de ações pedagógicas e administrativas. Para que sejam úteis no cotidiano, é necessário oferecer formas simples de consultar e compreender essas informações.
 
-1. Copie a pasta `smartreport` deste pacote para o diretório `local` da
-   instalação do Moodle:
+O SmartReport busca aproximar as perguntas das equipes educacionais dos dados disponíveis no Moodle. Com uma interface de conversa, a proposta é reduzir a necessidade de conhecimento técnico para realizar consultas e tornar os indicadores mais acessíveis à gestão.
 
-   ```text
-   <moodle>/local/smartreport
-   ```
+## Objetivo
 
-2. Acesse o Moodle como administrador do site.
-3. Abra **Administração do site > Notificações** e conclua a instalação ou
-   atualização do plugin.
-4. Acesse **Administração do site > Relatórios > SmartReport**.
+Desenvolver um plugin integrado ao Moodle para consultar e apresentar informações pedagógicas e administrativas em linguagem natural, com apoio de IA generativa e possibilidade de integração à infraestrutura institucional de IA.
 
-O componente do plugin é `local_smartreport`.
+Seus objetivos são:
 
-## Acesso
+- Facilitar o acesso às informações dos cursos e do ambiente virtual.
+- Apoiar o acompanhamento da participação e da conclusão de cursos.
+- Simplificar consultas recorrentes utilizadas na gestão educacional.
+- Oferecer informações para orientar decisões e ações de acompanhamento.
+- Permitir o uso de IA local, em alinhamento com a proposta de autonomia tecnológica e controle institucional dos dados.
 
-O plugin registra duas páginas no menu **Relatórios**:
+## Público e aplicação
 
-- **SmartReport:** página inicial com os cartões de consulta, relatórios
-  populares e termos de uso.
-- **Configurações do SmartReport:** formulário de configuração do plugin.
+O SmartReport é voltado ao apoio às equipes responsáveis pela administração do Moodle, pela gestão acadêmica e pelo acompanhamento pedagógico dos cursos. Os relatórios podem subsidiar o trabalho de gestores, coordenações e equipes educacionais.
 
-O acesso é limitado a administradores do site. A capability
-`local/smartreport:view` existe no contexto do sistema, mas não é atribuída a
-arquétipos nesta versão; além disso, o plugin verifica explicitamente se o
-usuário é administrador.
+**Na implementação atual, o uso do plugin é restrito aos administradores do site.** O público beneficiado pelas informações é mais amplo que o conjunto de usuários autorizados a consultar diretamente a ferramenta.
 
-## Configuração
+Um exemplo de aplicação é identificar participantes que estão sem acessar determinado curso há mais de 15 dias. A equipe responsável pode utilizar essa informação para avaliar a necessidade de acompanhamento e planejar ações de contato, considerando o contexto de cada turma.
 
-Na página **Configurações do SmartReport**, estão disponíveis os seguintes
-campos:
+## Como funciona
 
-| Campo | Descrição |
+1. **Pergunta:** o administrador informa o que deseja consultar na interface de conversa.
+2. **Interpretação:** o modelo de IA identifica a ferramenta disponível e os parâmetros correspondentes ao pedido.
+3. **Consulta:** o SmartReport valida a solicitação e busca os dados no Moodle.
+4. **Apresentação:** o resultado é exibido em tabelas e indicadores para análise.
+
+Os registros apresentados são obtidos pelas consultas implementadas no plugin. A IA auxilia na interpretação da pergunta; a consulta ao banco é executada pelo SmartReport por meio da conexão já utilizada pelo Moodle.
+
+## Recursos disponíveis
+
+A versão atual oferece um conjunto inicial de consultas:
+
+| Recurso | Finalidade |
 | --- | --- |
-| **Provedor de IA** | Seleciona OpenAI, Google Gemini ou um provedor local baseado em Llama. |
-| **Chave de API** | Salva uma chave para uso futuro pelo provedor selecionado. Deixe vazia para manter a chave atual. |
-| **Remover chave de API salva** | Remove a chave armazenada nas configurações do Moodle. |
-| **URL de consulta** | URL HTTP ou HTTPS do provedor local. É obrigatória quando o provedor Local (Llama) é selecionado e não pode conter credenciais. |
-| **Modelos** | Um ou mais modelos separados por vírgula. Cada nome pode ter até 100 caracteres. |
-| **Nome do chat exibido aos usuários** | Personaliza o título apresentado na interface. |
-| **Registros por página** | Número inteiro entre 1 e 200. |
-| **Conteúdo dos termos de uso** | Texto exibido na seção de termos de uso. |
+| Indicadores do ambiente | Consultar cursos visíveis, contas não suspensas ou excluídas e acessos recentes ao site. |
+| Busca de cursos | Localizar cursos pelo nome e consultar seus identificadores e sua visibilidade. |
+| Consulta de papéis | Identificar os papéis cadastrados no Moodle para orientar filtros nas consultas. |
+| Indicadores por curso | Acompanhar participantes com matrícula ativa, acesso recente e conclusão registrada. |
+| Participantes sem acesso | Identificar participantes sem acesso ao curso no período informado, com filtro opcional por papel. |
 
-As configurações são globais para o site. A chave de API não é inserida
-novamente no HTML do formulário ao editar as configurações.
+Também é possível atualizar os indicadores gerais por um botão de consulta direta, sem utilizar IA.
 
-## Funcionalidades disponíveis
+### Exemplos de perguntas
 
-Na versão atual, a página inicial oferece:
+- “Mostre os indicadores do ambiente nos últimos 7 dias.”
+- “Busque cursos com Administração no nome.”
+- “Liste os papéis disponíveis.”
+- “Mostre os indicadores do curso ID 7 nos últimos 30 dias.”
+- “Quais participantes do curso ID 7, com papel ID 5, estão sem acessar há mais de 15 dias?”
 
-- cartão **Novo**, com indicação de que a interface de nova consulta será
-  disponibilizada na sprint 2;
-- cartão **Populares**, com indicação de que o catálogo de relatórios
-  populares será disponibilizado na sprint 6;
-- seção **Termos de uso**, que exibe o conteúdo configurado ou uma mensagem
-  informando que os termos ainda estão pendentes;
-- personalização do nome exibido no cabeçalho;
-- layout responsivo e estilos próprios do plugin.
+Os identificadores devem corresponder aos cursos e papéis existentes na instalação. A busca de cursos e a consulta de papéis permitem encontrar esses valores.
 
-Embora a configuração já contenha opções de provedores, modelos e URL local,
-esta versão ainda não envia consultas para provedores de IA. O fluxo de
-integração deve ser implementado em uma versão futura.
+Os resultados devem ser interpretados conforme o indicador: acesso ao curso é diferente de acesso ao site; participantes com matrícula ativa não representam apenas alunos quando não há filtro de papel; e os dados de conclusão dependem das configurações e dos registros do Moodle.
 
-## Privacidade e segurança
+## Inteligência artificial e dados institucionais
 
-- O plugin não armazena dados pessoais nesta versão.
-- Nenhum dado é enviado a provedores de IA na implementação atual.
-- As configurações são armazenadas como configurações globais do Moodle.
-- O acesso às páginas é protegido por login, capability e verificação de
-  administrador do site.
-- URLs do provedor local aceitam somente os esquemas `http` e `https` e não
-  podem incluir usuário ou senha.
-- Valores de modelos e quantidade de registros são validados antes de serem
-  salvos.
+A proposta institucional prevê o uso de **IAGen local**, com o objetivo de ampliar a autonomia tecnológica e o controle sobre os dados. O SmartReport já oferece integração com **Ollama**, além das opções **OpenAI** e **Google Gemini**.
 
-## Estrutura do pacote
+A compatibilidade com Ollama permite conectar o plugin a um serviço local configurado pela instituição. A implantação da infraestrutura institucional de IA é uma frente própria da proposta mais ampla da SmartEdu; não é realizada automaticamente pela instalação do SmartReport.
 
-```text
-smartreport/
-├── classes/
-│   ├── access.php                 # Controle de acesso
-│   ├── configuration.php          # Validação das configurações
-│   ├── form/configuration.php     # Formulário de configuração
-│   └── privacy/provider.php       # Declaração de privacidade
-├── db/access.php                  # Capability do plugin
-├── lang/
-│   ├── en/local_smartreport.php   # Strings em inglês
-│   └── pt_br/local_smartreport.php # Strings em português do Brasil
-├── pix/                           # Ícones da interface
-├── templates/home.mustache        # Template da página inicial
-├── configure.php                  # Página de configurações
-├── index.php                      # Página principal
-├── settings.php                   # Itens no menu de administração
-├── styles.css                     # Estilos do plugin
-└── version.php                    # Metadados e requisitos do plugin
-```
+Na implementação atual:
 
-## Desenvolvimento
-
-O plugin segue a estrutura padrão de um plugin local do Moodle. Durante o
-desenvolvimento:
-
-1. Faça as alterações dentro de `local/smartreport`.
-2. Limpe os caches do Moodle em **Administração do site > Desenvolvimento >
-   Limpar todos os caches** quando alterar templates, strings ou estilos.
-3. Verifique a instalação com o modo de desenvolvimento e os validadores
-   padrão do Moodle antes de publicar uma nova versão.
+- As ferramentas de relatório fazem consultas predefinidas de leitura, sem alterar ou excluir os registros consultados.
+- O modelo não recebe as credenciais do banco nem executa consultas SQL livres.
+- Perguntas, mensagens de contexto e resumos das consultas são enviados ao provedor configurado.
+- Nomes de participantes e linhas dos resultados não são automaticamente incluídos no histórico enviado ao modelo. Dados pessoais digitados na pergunta acompanham a solicitação.
+- O plugin não mantém histórico persistente de conversas.
 
 ## Licença
 
-Este projeto é distribuído sob a **GNU General Public License, versão 3 ou
-posterior (GPL-3.0-or-later)**. Consulte [`smartreport/COPYING.txt`](smartreport/COPYING.txt)
-para o texto completo da licença.
+O código está disponibilizado sob a [GNU GPL v3 ou posterior](smartreport/COPYING.txt).

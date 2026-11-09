@@ -1,0 +1,27 @@
+{{! Conversation content is rendered as plain text. Provider calls run on the server. }}
+<div class="smartreport-chat" data-region="smartreport-chat" data-waiting="{{#str}}aiwaiting, local_smartreport{{/str}}" data-error="{{#str}}aierror, local_smartreport{{/str}}" data-reset="{{#str}}chatreset, local_smartreport{{/str}}" data-more="{{#str}}reportmore, local_smartreport{{/str}}">
+    <div class="smartreport-query-card">
+        <header class="smartreport-chat-header">
+            <div><h2>{{chatname}}</h2><p class="smartreport-query-subtitle">{{#str}}querysubtitle, local_smartreport{{/str}}</p></div>
+            <a class="smartreport-gear" href="{{settings}}" aria-label="{{#str}}settings, local_smartreport{{/str}}" title="{{#str}}settings, local_smartreport{{/str}}">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><path d="m9 3-.6 2.4-1.7 1L4.3 6 2.8 8.6l1.8 1.7v2L2.8 14l1.5 2.6 2.4-.4 1.7 1L9 20h3l.6-2.8 1.7-1 2.4.4 1.5-2.6-1.8-1.7v-2l1.8-1.7L16.7 6l-2.4.4-1.7-1L12 3Z" transform="translate(1.5 .5)"/><circle cx="12" cy="12" r="3"/></svg>
+            </a>
+        </header>
+        <form data-region="composer" class="smartreport-composer">
+            <label class="smartreport-visually-hidden" for="smartreport-message">{{#str}}yourmessage, local_smartreport{{/str}}</label>
+            <div class="smartreport-input-row">
+                <button type="button" class="smartreport-new-query" data-action="new-query" disabled aria-label="{{#str}}newquery, local_smartreport{{/str}}" title="{{#str}}newquery, local_smartreport{{/str}}"><span aria-hidden="true">+</span></button>
+                <textarea id="smartreport-message" rows="1" maxlength="4000" required disabled aria-describedby="smartreport-chat-help" placeholder="{{#str}}messageplaceholder, local_smartreport{{/str}}"></textarea>
+                <button type="submit" class="btn btn-primary" disabled aria-label="{{#str}}sendmessage, local_smartreport{{/str}}">{{#str}}send, local_smartreport{{/str}}</button>
+            </div>
+            <small id="smartreport-chat-help">{{#str}}chathelp, local_smartreport{{/str}}</small>
+        </form>
+    </div>
+    <p class="smartreport-chat-status" data-region="status" role="status"></p>
+    <p class="smartreport-chat-error" data-region="error" role="alert"></p>
+    <div class="smartreport-messages" data-region="messages" role="log" aria-live="polite" aria-relevant="additions" aria-label="{{#str}}conversation, local_smartreport{{/str}}"></div>
+    <details class="smartreport-chat-info"><summary>{{#str}}aboutai, local_smartreport{{/str}}</summary><p>{{#str}}chatnotice, local_smartreport{{/str}}</p></details>
+    <noscript><p>{{#str}}chatscriptrequired, local_smartreport{{/str}}</p></noscript>
+    <template data-region="user-template"><div class="smartreport-message smartreport-message-user"><span class="smartreport-author">{{#str}}yourquestion, local_smartreport{{/str}}</span><p class="smartreport-bubble"></p></div></template>
+    <template data-region="reply-template"><div class="smartreport-message smartreport-message-assistant"><span class="smartreport-author">{{chatname}}</span><p class="smartreport-bubble"></p></div></template>
+</div>
